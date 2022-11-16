@@ -16,6 +16,7 @@ data "aws_ami" "app_ami" {
 
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
+  name   = "blog_vpc"
 
   name = "dev"
   cidr = "10.0.0.0/16"
@@ -50,7 +51,7 @@ module "alb" {
 
   load_balancer_type = "application"
 
-  vpc_id             = module.blog_vpc.vpc_id
+  vpc_id             = module.blog_vpc.id
   subnets            = module.blog_vpc.public_subnets
   security_groups    = [module.blog_sg.security_group_id]
 
